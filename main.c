@@ -38,13 +38,15 @@ void	loop(int pid_fork)
 {
 	char * line;
 	
-	while ((line = readline("minishell>")))
+	line = readline("minishell>");
+	while (line)
 	{
 		sleep(1);
 		printf("%d\n", getpid());
 		if (sigint_receiver)
 			close_active_process(pid_fork);
 		system("ps -f");
+		line = readline("minishell>");
 	}
 }
 
